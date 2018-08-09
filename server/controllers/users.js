@@ -16,40 +16,50 @@ module.exports = (function() {
 		},
 		create: function(req, res) {
 			console.log("**********Hitting the create route**********")
-			NewUser = new User(req.params)
+			NewUser = new User(req.body)
 			NewUser.save(function(err){
 				if(err){
 					console.log("**********Hit a creation error**********");
 					res.json(err);
 				}else {
 					console.log("**********Successful creation**********");
-					res.redirect('/');
+					res.json(NewUser);
 				}
 			})	
 		},
 		remove: function(req, res) {
-			User.remove({name: req.params.name}, function(err, users) {
+			User.remove({name: req.body.name}, function(err, users) {
 				if(err) {
 					console.log("**********Hit an error**********")
 					res.send("<h1>Hit an error</h1>" + users);
 				} else {
 					console.log("**********Successful removed user**********")
-					res.redirect('/');
+					res.redirect('/users');
 				}
 			}
 		)
 		},
 		show: function(req, res) {
-			User.find({name: req.params.name}, function(err, users) {
+			User.findOne({_id: req.params.id}, function(err, users) {
 				if(err) {
 					console.log("**********Show error**********");
-					res.send('<h1>Show error</h1>' + err);
+					res.send(err);
 				} else {
 					res.json(users);
 				}
 			}
-		)
-		},
-
+		)},
+		update: function(req, res){
+			console.log("*********hitting the update route**********");
+			User.update({_id: req.params.id}, req.body, function(err){
+				if (err) {
+					console.log("*********update error*********");
+					res.json({message: "failed"});
+				}else{
+					console.log("**********Successful update*********");
+					res.json({message: "success"});
+				}	
+			})
+		}
 	}
-})();
+});
