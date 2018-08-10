@@ -12,6 +12,7 @@ export class HttpService {
     this.deleteRemove("Evan Hobbs");
     this.getShow("5b6cd313ece1fb46cc8e355c");
     this.putUpdate("5b6cd531ece1fb46cc8e3571","Bill Nye the Science Guy");
+    this.getPokemon(1);
   }
   getIndex(){
     // our http response is an Observable, store it in a variable
@@ -32,8 +33,13 @@ export class HttpService {
     tempObservable.subscribe(data => console.log("Retrieved our queried data!", data));
   }
   putUpdate(id, name){
-    let tempObservable = this._http.put('/users/'+id, {name: name});
+    let tempObservable = this._http.put('/users/'+id, {name: name});  
     tempObservable.subscribe(data => console.log("Updated our queried data!", data));
+  }
+  getPokemon(id){
+    let pokemon
+    let tempObservable = this._http.get('https://pokeapi.co/api/v2/pokemon/1/');
+    tempObservable.subscribe(data =>   console.log(pokemon = data) )
   }
 }
 

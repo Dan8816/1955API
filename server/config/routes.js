@@ -15,5 +15,5 @@ module.exports = function(app) {
 	})
 	app.put('/users/:id', function(req, res){
 		users.update(req, res)
-})
+	})
 }
