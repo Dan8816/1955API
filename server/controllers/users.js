@@ -28,7 +28,7 @@ module.exports = (function() {
 			})	
 		},
 		remove: function(req, res) {
-			User.remove({name: req.body.name}, function(err, users) {
+			User.remove({_id: req.body}, function(err, users) {
 				if(err) {
 					console.log("**********Hit an error**********")
 					res.send("<h1>Hit an error</h1>" + users);

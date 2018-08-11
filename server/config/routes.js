@@ -7,7 +7,7 @@ module.exports = function(app) {
 	app.post('/users', function(req, res) {
 		users.create(req, res);
 	})
-	app.delete('/users/:name', function(req, res) {
+	app.delete('/users', function(req, res) {
 		users.remove(req, res);
 	})
 	app.get('/users/:id', function(req, res) {
